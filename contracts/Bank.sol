@@ -10,6 +10,13 @@ contract Bank {
         _balances[msg.sender] += _amount;
     }
 
+    function transfer (address _to, uint _amount) public {
+        require(_to != address (0), "Address 0");
+        require(_balances[msg.sender] >= _amount, "Not enough funds");
+        _balances[_to] += _amount;
+        _balances[msg.sender] -= _amount;
+    }
+
     function getBalance (address _address) public view returns (uint) {
         return _balances[_address];
     }
